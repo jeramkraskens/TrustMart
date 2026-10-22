@@ -116,6 +116,7 @@ export default function Browse() {
         <div className="tm-container">
           <div>
             <h1>Browse Verified Listings</h1>
+            {!user && <p>Browse verified items without an account. Sign in when you want to buy or save an item.</p>}
             <p>
               {loading
                 ? "Loading listings..."

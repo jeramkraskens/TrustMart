@@ -50,17 +50,13 @@ class ListingViewSet(viewsets.ModelViewSet):
         if wants_all and is_staff:
             return qs
 
-        if self.request.query_params.get('status') is None:
-            if is_staff:
-                # Staff can always open any listing (e.g. from the moderation/admin queue).
-                return qs
-            if user.is_authenticated:
-                # Everyone sees verified listings; a seller can also always open
-                # their own listing regardless of its status (draft/pending/rejected).
-                qs = qs.filter(Q(status='verified') | Q(seller=user))
-            else:
-                qs = qs.filter(status='verified')
-        return qs
+        if is_staff:
+            return qs
+        # Apply visibility before optional status filters, so a guest cannot
+        # expose private drafts by adding ?status=draft or ?all=true.
+        if user.is_authenticated:
+            return qs.filter(Q(status='verified') | Q(seller=user))
+        return qs.filter(status='verified')
 
     # DRF calls this hook after validation, allowing the server to set ownership during saving.
     @transaction.atomic

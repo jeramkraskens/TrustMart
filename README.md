@@ -1,5 +1,9 @@
 # Second-Hand Goods Verification Marketplace
 
+Current laptop setup and free hosting instructions (Sinhala + English):
+[TrustMart setup and hosting guide](TRUSTMART_SETUP_SI_EN.md).
+Live site: https://trustmartlk.pythonanywhere.com — verified items can be browsed without signing in.
+
 > **30 September 2026:** The final backend/frontend export has been integrated,
 > with compatibility updates for both Android apps. Start with
 > [FINAL_PROJECT_INTEGRATION.md](FINAL_PROJECT_INTEGRATION.md) for current behavior,

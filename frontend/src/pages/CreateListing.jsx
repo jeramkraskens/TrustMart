@@ -7,6 +7,7 @@ import client from '../api/client';
 import PhotoUpload from '../components/PhotoUpload';
 import LocationSelect from '../components/LocationSelect';
 import { useAuth } from '../context/AuthContext';
+import { Camera } from 'lucide-react';
 
 export default function CreateListing() {
   const { id } = useParams();
@@ -152,8 +153,13 @@ function ListingForm({ id }) {
           <textarea id="evidence-notes" required={!id} value={evidenceNotes} onChange={(e) => setEvidenceNotes(e.target.value)} rows={3}
             placeholder="e.g. Original receipt attached, purchased in 2023, no visible damage."
             className="w-full px-4 py-2.5 rounded-lg border border-ink/15 bg-white focus:outline-none focus:border-brass mb-3" />
-          <label htmlFor="evidence-file">Evidence file{id ? ' (choose a file to replace existing)' : ''}</label>
-          <input id="evidence-file" required={!id} type="file" accept="image/*,.pdf" onChange={(e) => setEvidenceFile(e.target.files[0])} className="w-full text-sm" />
+          <label htmlFor="evidence-file" className="flex items-center gap-2 text-sm font-medium mb-2 cursor-pointer">
+            <Camera size={18} aria-hidden="true" className="text-teal shrink-0" />
+            Evidence photo or PDF{id ? ' (replace existing)' : ''}
+          </label>
+          <input id="evidence-file" required={!id} type="file" accept="image/*,.pdf" aria-describedby="evidence-help" onChange={(e) => setEvidenceFile(e.target.files[0])}
+            className="w-full text-sm rounded-lg border border-ink/15 bg-white p-3 file:mr-3 file:rounded-lg file:border-0 file:bg-teal file:px-3 file:py-2 file:text-white file:cursor-pointer focus-visible:outline-2 focus-visible:outline-teal" />
+          <small id="evidence-help" className="block text-xs text-ink/60 mt-2">Choose a receipt, warranty card or evidence photo for moderator review.</small>
         </div>
 
         {error && <p className="text-rust text-sm break-words" role="alert">{error}</p>}
