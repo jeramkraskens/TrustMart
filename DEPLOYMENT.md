@@ -1,7 +1,7 @@
 # TrustMart hosting
 
-Live website: https://jeramkraskens.pythonanywhere.com
-API base URL: https://jeramkraskens.pythonanywhere.com/api/
+Live website: https://trustmartlk.pythonanywhere.com
+API base URL: https://trustmartlk.pythonanywhere.com/api/
 Source: https://github.com/jeramkraskens/TrustMart
 
 ## Current deployment
@@ -25,9 +25,9 @@ WebSockets are not enabled on this deployment.
 
 ## Paths and settings
 
-- Code: `/home/jeramkraskens/TrustMart`
-- Virtualenv: `/home/jeramkraskens/trustmart-venv`
-- WSGI file: `/var/www/jeramkraskens_pythonanywhere_com_wsgi.py`
+- Code: `/home/trustmartlk/TrustMart`
+- Virtualenv: `/home/trustmartlk/trustmart-venv`
+- WSGI file: `/var/www/trustmartlk_pythonanywhere_com_wsgi.py`
 - Django settings: `config.pythonanywhere`
 - Frontend build: `deploy/web`
 - Database: `backend/db.sqlite3`
@@ -74,7 +74,7 @@ If an older browser cached a redirect loop, clear site cache or use a fresh brow
 ## Mobile apps
 
 Set the app's server/API URL to:
-`https://jeramkraskens.pythonanywhere.com/api/`
+`https://trustmartlk.pythonanywhere.com/api/`
 Existing APKs are not automatically rebuilt by hosting the backend. Their saved
 local server address must be changed. WebSocket-only features need HTTP fallback
 on this WSGI host; no mobile device integration test has been performed.
@@ -86,3 +86,4 @@ on this WSGI host; no mobile device integration test has been performed.
 - Public homepage and login render; HTTPS health endpoint returns `{"status":"ok"}`.
 - Existing Render configuration is an alternative, not the active deployment.
 - The previously created Supabase project is unused by this deployment.
+
