@@ -8,10 +8,13 @@ from whitenoise.middleware import WhiteNoiseMiddleware
 
 
 class FrontendStaticMiddleware(WhiteNoiseMiddleware):
-    def __init__(self, get_response=None, settings=None):
-        super().__init__(get_response, settings)
+    def __init__(self, get_response):
+        super().__init__(get_response)
         from django.conf import settings as django_settings
         self.add_files(str(django_settings.FRONTEND_DIST / 'assets'), prefix='assets/')
+        favicon = django_settings.FRONTEND_DIST / 'favicon.svg'
+        if favicon.exists():
+            self.add_file_to_dictionary('/favicon.svg', str(favicon))
 
 
 class SignedMediaStorage(FileSystemStorage):
