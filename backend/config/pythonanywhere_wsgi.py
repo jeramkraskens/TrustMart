@@ -1,0 +1,6 @@
+"""Entry point imported by the PythonAnywhere WSGI configuration."""
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'config.pythonanywhere'
+application = get_wsgi_application()

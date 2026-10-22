@@ -1,4 +1,4 @@
-"""Free demo hosting: one ASGI process, local persistent SQLite and uploads."""
+"""Free WSGI demo hosting with persistent SQLite and signed local uploads."""
 import os
 
 os.environ.setdefault('DEBUG', 'False')

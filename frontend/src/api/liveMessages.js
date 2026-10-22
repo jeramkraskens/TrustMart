@@ -6,6 +6,15 @@ export function connectMessages(onChange, onStatus) {
 }
 
 export function connectLiveUpdates(resource, onChange, onStatus = () => {}) {
+  // Standard WSGI hosting uses the same authenticated HTTP endpoints.
+  if (import.meta.env.VITE_LIVE_TRANSPORT === 'polling') {
+    onStatus('Auto-refresh');
+    onChange();
+    const poll = setInterval(() => {
+      if (document.visibilityState === 'visible') onChange();
+    }, 15000);
+    return () => clearInterval(poll);
+  }
   let stopped = false;
   let socket;
   let retry;
