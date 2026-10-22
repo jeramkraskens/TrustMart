@@ -14,8 +14,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-produc
 DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 
-INSTALLED_APPS = [
-    'daphne',
+INSTALLED_APPS = (['daphne'] if config('USE_DAPHNE', default=True, cast=bool) else []) + [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,7 +100,7 @@ ASGI_APPLICATION = 'config.asgi.application'
 
 # A single development server works without Redis. Multiple workers must share Redis.
 REDIS_URL = config('REDIS_URL', default='')
-if not DEBUG and not REDIS_URL:
+if not DEBUG and not REDIS_URL and not config('SINGLE_PROCESS_CHANNELS', default=False, cast=bool):
     from django.core.exceptions import ImproperlyConfigured
     raise ImproperlyConfigured('Set REDIS_URL for production live messaging.')
 CHANNEL_LAYERS = {
