@@ -1,0 +1,7 @@
+<resources>
+    <!-- Dark navigation icons are available only on Android 8.1+. -->
+    <style name="Theme.TrustMart" parent="BaseTrustMartTheme">
+        <item name="android:navigationBarColor">#F6F7F9</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

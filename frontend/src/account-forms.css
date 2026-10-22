@@ -1,0 +1,34 @@
+.account-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.account-field, .password-field { min-width: 0; }
+.account-field label, .password-field label, .identity-fields label, .profile-settings label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.account-form { display: grid; gap: 16px; min-width: 0; }
+.district-only { grid-template-columns: 1fr; }
+.password-control { position: relative; }
+.password-control .tm-input { width: 100%; padding-right: 48px; }
+.password-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 8px; background: transparent; color: #64748b; }
+.password-toggle:hover { background: #e0f5f2; color: #0f766e; }
+.field-help { display: block; color: #666b75; font-size: 12px; line-height: 1.6; margin-top: 5px; }
+.identity-fields { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; min-width: 0; }
+.identity-fields legend { padding: 0 6px; font-size: 13px; font-weight: 600; }
+/* Section: Seller identity — align controls and leave room for the optional letter label. */
+.nic-fields { display: grid; grid-template-columns: minmax(0, 1fr) 170px; gap: 16px; align-items: end; }
+.nic-fields .account-field { display: flex; flex-direction: column; gap: 6px; }
+.nic-fields .account-field label { margin: 0; line-height: 20px; }
+.nic-fields .tm-input { width: 100%; height: 48px; margin: 0; }
+.nic-fields .optional-label { color: #666b75; font-weight: 400; }
+.identity-fields > .field-help { margin-top: 12px; }
+.register-form > .account-field, .register-form > .account-field-row, .register-form > .password-field, .register-form > .location-fields, .register-form > .identity-fields { margin-top: 16px; }
+.register-form .account-field label, .register-form .password-field label { margin-top: 0; }
+.profile-settings .tm-input { width: 100%; }
+@media (min-width: 701px) {
+  .tm-header-inner:has(.desktop-nav) { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px; }
+  .desktop-nav { justify-content: center; white-space: nowrap; }
+  .tm-header-inner:has(.desktop-nav) .header-actions { justify-self: end; margin-left: 0; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .desktop-nav { gap: 18px; }
+  .tm-header-inner:has(.desktop-nav) .header-profile > span:not(.tm-avatar) { display: none; }
+  .tm-header-inner:has(.desktop-nav) .header-actions { gap: 5px; }
+  .tm-header-inner:has(.desktop-nav) .icon-button { width: 30px; height: 34px; }
+}
+@media (max-width: 480px) { .account-field-row, .nic-fields { grid-template-columns: 1fr; } }

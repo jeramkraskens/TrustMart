@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "./trustmart.css";
+@import "./detail.css";
+@import "./dashboard.css";
+@import "./responsive.css";
+@import "./photo-upload.css";
+@import "./listing-management.css";
+@import "./advertisements.css";
+@import "./search-suggestions.css";
+@import "./account-forms.css";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+
+  /* Deep navy — headers, hero panels, admin sidebar */
+  --color-navy: #111832;
+  --color-navy-light: #16263D;
+
+  /* Teal — primary brand color */
+  --color-teal: #169b8e;
+  --color-teal-dark: #0F766E;
+  --color-teal-light: #CCFBEF;
+
+  /* Neutrals */
+  --color-ink: #18181b;
+  --color-paper: #f8f8f8;
+  --color-paper-warm: #f0f0f1;
+
+  /* Status accents */
+  --color-amber: #D97706;
+  --color-amber-light: #FEF3C7;
+  --color-purple: #7C3AED;
+  --color-purple-light: #EDE9FE;
+  --color-rust: #DC2626;
+  --color-rust-light: #FEE2E2;
+  --color-sage: #059669;
+  --color-sage-light: #D1FAE5;
+
+  /* Legacy aliases kept so existing components referencing "ink"/"brass" still work */
+  --color-ink-light: #16263D;
+  --color-brass: #0D9488;
+  --color-brass-light: #CCFBEF;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-teal-light);
+}
+/* Role-aware notification inbox and live foreground alerts. */
+.notification-bell { position: relative; }
+.notification-count { position: absolute; top: -5px; right: -7px; min-width: 19px; padding: 2px 4px; border-radius: 999px; background: #b54135; color: white; font-size: 10px; text-align: center; }
+.notification-page { padding-top: 32px; padding-bottom: 48px; max-width: 900px; }
+.notification-list { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 12px; }
+.notification-list li { border: 1px solid #deded5; border-radius: 12px; padding: 18px; background: white; }
+.notification-list li.unread { border-left: 4px solid #167568; background: #f0faf6; }
+.notification-list li > div:first-child { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.notification-list strong { text-transform: capitalize; }
+.notification-list p { margin: 8px 0; overflow-wrap: anywhere; }
+.notification-list time { font-size: 12px; opacity: .65; }
+.notification-toast { position: fixed; bottom: 24px; right: 24px; z-index: 1000; width: min(380px, calc(100vw - 32px)); padding: 20px; border: 1px solid #b3d9cd; border-radius: 14px; background: white; color: #163d35; box-shadow: 0 8px 36px #0002; }
+.notification-toast p { margin: 8px 0; overflow-wrap: anywhere; }
+.notification-toast > div { display: flex; justify-content: space-between; margin-top: 12px; gap: 16px; }
+.notification-toast a, .notification-toast button { font-weight: 600; text-decoration: underline; }

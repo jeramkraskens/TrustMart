@@ -1,0 +1,21 @@
+.location-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.location-fields label, .listing-form-section > label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; }
+.location-fields .tm-input { width: 100%; min-width: 0; }
+.location-fields .form-error { grid-column: 1 / -1; }
+.filter-section .location-fields { grid-template-columns: 1fr; margin-bottom: 12px; }
+.listing-form-section { padding: 18px; background: white; border: 1px solid #e4e8e7; border-radius: 14px; }
+.listing-form-section h2 { font-size: 16px; font-weight: 650; margin-bottom: 8px; }
+.listing-form-section .muted { font-size: 13px; line-height: 1.6; margin: 8px 0 14px; }
+.listing-form-section .tm-input { width: 100%; }
+.listing-form-section .check-row { display: flex; margin-top: 12px; gap: 10px; }
+.seller-listing-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tm-button.danger-button { color: #b42318; border-color: #f3bbb5; background: #fff2f0; }
+.tm-button.danger-button:hover { background: #ffe1dc; }
+.listing-delete-modal { max-width: 480px; width: calc(100% - 32px); border: 0; padding: 26px; border-radius: 18px; box-shadow: 0 12px 70px #0003; }
+.listing-delete-modal::backdrop { background: #11183288; }
+.listing-delete-modal h2 { font-size: 21px; font-weight: 700; }
+.listing-delete-modal p { margin: 16px 0 22px; line-height: 1.6; overflow-wrap: anywhere; }
+.tm-button.whatsapp-button { background: #168445; color: white; }
+.detail-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.detail-actions > a { min-width: 0; overflow-wrap: anywhere; }
+@media(max-width: 480px) { .location-fields { grid-template-columns: 1fr; } }

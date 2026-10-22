@@ -1,0 +1,63 @@
+.ad-admin { padding: 28px 32px; }
+.ad-field-error { display: block; color: #b42318; font-size: 12px; margin-top: 5px; }
+.ad-form [aria-invalid=true], .register-form [aria-invalid=true] { border-color: #d92d20; background-color: #fff8f7; }
+.ad-popup { margin: auto; padding: 0; border: 0; width: min(540px, calc(100vw - 32px)); max-height: min(90dvh, 780px); overflow-y: auto; overscroll-behavior: contain; border-radius: 24px; background: #fff; color: #18181b; box-shadow: 0 30px 100px #091e4266; }
+.ad-popup[open] { animation: ad-popup-enter 350ms cubic-bezier(.16, 1, .3, 1) both; }
+.ad-popup::backdrop { background: #11183299; backdrop-filter: blur(5px); animation: ad-backdrop-enter 250ms ease both; }
+.ad-popup.is-closing { animation: ad-popup-leave 180ms ease both; pointer-events: none; }
+.ad-popup.is-closing::backdrop { animation: ad-backdrop-leave 180ms ease both; }
+.ad-popup-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #f0faf7; border-bottom: 1px solid #e1eeea; }
+.ad-popup-header > span { display: flex; gap: 8px; align-items: center; color: #087c77; font-size: 13px; font-weight: 600; }
+.ad-popup-close, .ad-popup-navigation button { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: white; border: 1px solid #dae9e5; color: #25594f; cursor: pointer; }
+.ad-popup button:focus-visible, .ad-popup a:focus-visible { outline: 3px solid #169b8e; outline-offset: 3px; }
+.ad-popup-image { width: 100%; max-height: 28dvh; object-fit: contain; background: #f1f5f4; }
+.ad-popup-copy { padding: 22px 26px 26px; }
+.ad-popup-copy h2 { font-size: clamp(23px, 4vw, 30px); font-weight: 750; line-height: 1.2; margin: 14px 0 10px; overflow-wrap: anywhere; }
+.ad-popup-copy p { color: #707079; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.ad-popup-content { animation: ad-content-enter 250ms ease both; }
+.ad-popup-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.ad-popup-actions > * { flex: 1; white-space: nowrap; }
+.ad-popup-navigation { display: flex; gap: 20px; align-items: center; justify-content: center; padding: 0 20px 20px; color: #707079; font-size: 13px; }
+@keyframes ad-popup-enter { from { opacity: 0; transform: translateY(28px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes ad-popup-leave { to { opacity: 0; transform: translateY(12px) scale(.97); } }
+@keyframes ad-backdrop-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ad-backdrop-leave { to { opacity: 0; } }
+@keyframes ad-content-enter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .ad-popup[open], .ad-popup::backdrop, .ad-popup.is-closing, .ad-popup.is-closing::backdrop, .ad-popup-content { animation: none; } }
+@media (max-width: 500px) { .ad-popup-copy { padding: 18px; } .ad-popup { border-radius: 18px; } .ad-popup-actions { flex-direction: column; } }
+.ad-offer-fields { display: grid; gap: 14px; padding: 16px; border: 1px solid #d9eeea; border-radius: 12px; background: #f7fcfa; }
+.ad-offer-fields > p { color: #707079; line-height: 1.5; }
+.advertisement-offer { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+.advertisement-offer > strong { color: #087c77; font-size: 24px; font-weight: 700; }
+.advertisement-offer > del { color: #777; font-size: 14px; }
+.ad-discount { color: #a84b00; background: #fff0d6; border-radius: 20px; padding: 5px 10px; font-size: 13px; font-weight: 700; }
+.ad-admin h1 { font-size: 26px; font-weight: 700; }
+.ad-admin > p { margin: 6px 0 14px; color: #707079; }
+.ad-admin .ad-success { background: #e1f5ec; padding: 12px; border-radius: 10px; color: #087c62; }
+.ad-form { margin: 20px 0; padding: 24px; background: white; border: 1px solid #eee; border-radius: 18px; scroll-margin-top: 20px; }
+.ad-form h2, .ad-card h2 { font-size: 17px; font-weight: 600; margin-bottom: 12px; }
+.ad-form fieldset { display: grid; gap: 18px; min-width: 0; }
+.ad-form label { display: grid; gap: 7px; font-size: 13px; }
+.ad-form p { font-size: 13px; margin-bottom: 7px; }
+.ad-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ad-form .ad-active { display: flex; align-items: center; gap: 8px; margin-top: 20px; }
+.ad-form input[type=checkbox] { width: 17px; height: 17px; accent-color: #169b8e; }
+.ad-image-picker { width: 100%; min-height: 125px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 14px; border: 2px dashed #169b8e; border-radius: 12px; color: #087c77; background: #f0fbf9; }
+.ad-image-picker img { width: 100%; max-height: 150px; object-fit: contain; border-radius: 8px; }
+.ad-image-picker span { overflow-wrap: anywhere; font-size: 13px; }
+.ad-card-grid, .promotion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
+.ad-card { border: 1px solid #e5e7eb; background: #fff; border-radius: 16px; overflow: hidden; }
+.ad-card > img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.ad-card-content { padding: 18px; }
+.ad-card-content h2 { margin: 10px 0 6px; overflow-wrap: anywhere; }
+.ad-card p, .ad-card small { color: #707079; overflow-wrap: anywhere; }
+.ad-card .button-row { margin-top: 16px; flex-wrap: wrap; gap: 8px; }
+.ad-admin button:disabled { opacity: .55; cursor: wait; }
+.home-promotions { padding-top: 34px; padding-bottom: 8px; }
+.home-promotions > h2 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+.promotion-card { background: #fff; border: 1px solid #e4eeec; border-radius: 18px; overflow: hidden; }
+.promotion-card > img { width: 100%; max-height: 320px; object-fit: contain; background: #f0f5f4; }
+.promotion-card > div { padding: 22px; }
+.promotion-card h3 { font-size: 22px; font-weight: 700; margin: 10px 0; overflow-wrap: anywhere; }
+.promotion-card p { color: #707079; margin-bottom: 16px; overflow-wrap: anywhere; }
+@media (max-width: 700px) { .ad-admin { padding: 20px 16px; } .ad-form { padding: 18px; } .ad-form-grid { grid-template-columns: 1fr; } }

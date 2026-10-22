@@ -1,0 +1,47 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+local.properties
+*.jks
+*.keystore
+*.pem
+*.key
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.sqlite3
+*.sqlite3-journal
+
+# Website
+node_modules/
+dist/
+
+# Android and editor output
+.gradle/
+.idea/
+**/build/
+.cxx/
+.externalNativeBuild/
+*.iml
+*.apk
+*.aab
+
+# Local uploads and generated files
+backend/media/
+backend/staticfiles/
+backend/sample_product_images.json
+*.log
+
+# Local integration rollback copies (may include private uploaded files)
+.integration-backups/
+
+# Archived cleanup items
+/Remove Items/
+
+backend/ml_cache/
+
+backend/ml_cache/

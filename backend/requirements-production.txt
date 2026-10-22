@@ -1,0 +1,4 @@
+-r requirements.txt
+dj-database-url>=2.3,<4
+whitenoise>=6.8,<7
+django-storages[s3]>=1.14,<2

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Development phones and emulators can use the configured local Django address. -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
