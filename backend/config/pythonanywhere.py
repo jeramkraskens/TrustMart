@@ -28,7 +28,9 @@ CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# PythonAnywhere WSGI supplies the trusted wsgi.url_scheme directly.
+# Its extra forwarding header can describe an internal HTTP hop.
+SECURE_PROXY_SSL_HEADER = None
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_CONTENT_TYPE_NOSNIFF = True
