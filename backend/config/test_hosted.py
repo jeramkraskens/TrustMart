@@ -21,6 +21,7 @@ class HostedDeliveryTests(SimpleTestCase):
                     self.assertEqual(response.status_code, 200)
                     self.assertEqual(b''.join(response.streaming_content), b'private receipt')
                     self.assertIn('attachment', response['Content-Disposition'])
+                    response.close()
                 with patch('django.core.signing.time.time', return_value=4601):
                     self.assertEqual(self.client.get(url).status_code, 404)
                 self.assertEqual(self.client.get(url + 'forged').status_code, 404)
@@ -30,5 +31,7 @@ class HostedDeliveryTests(SimpleTestCase):
         with tempfile.TemporaryDirectory() as directory:
             Path(directory, 'index.html').write_text('<html>TrustMart</html>')
             with override_settings(FRONTEND_DIST=Path(directory)):
-                self.assertEqual(self.client.get('/admin/overview').status_code, 200)
+                response = self.client.get('/admin/overview')
+                self.assertEqual(response.status_code, 200)
+                response.close()
                 self.assertEqual(self.client.get('/api/not-a-real-endpoint/').status_code, 404)
