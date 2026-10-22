@@ -1,57 +1,88 @@
-# TrustMart free demo deployment
+# TrustMart hosting
 
-Status: deployment configuration prepared. Supabase project `nfdnujrtikfhrokahnyk`
-exists in Singapore. GitHub repository: https://github.com/jeramkraskens/TrustMart
-(public, currently empty). GitHub source upload was rejected with HTTP 403
-"Resource not accessible by integration"; repository write access must be fixed.
-No working public application deployment has been verified.
+Live website: https://jeramkraskens.pythonanywhere.com
+API base URL: https://jeramkraskens.pythonanywhere.com/api/
+Source: https://github.com/jeramkraskens/TrustMart
 
-Connect GitHub, Render, and Supabase to complete deployment. Keep the source
-repository private. Upload source only, respecting .gitignore; do not upload
-backend/.env, databases, media, virtual environments, or Android signing keys.
+## Current deployment
 
-## Services
+PythonAnywhere Beginner (free, no card), Python 3.13, Django WSGI,
+React production build, persistent SQLite and signed local uploads.
+The website runs on PythonAnywhere even when the developer's PC is off.
+The database starts fresh; local users, listings and private files were not uploaded.
+Six marketplace categories are initialized. Payments remain the project's demo
+escrow simulation; no real payment provider is connected.
 
-- Render: static React site, free Django ASGI service, free Key Value instance.
-- Supabase Free: PostgreSQL and a PRIVATE storage bucket named trustmart-media.
-- Android: existing APKs use the hosted HTTPS API in their server settings.
+The account currently requires renewal before **22 November 2026**. Each month,
+open PythonAnywhere > Web and click **Run until 1 month from today**.
+The free account has 512 MB storage and limited capacity, suitable for a viva/demo.
+Custom domains require a paid PythonAnywhere plan and an owned domain.
 
-## Configuration
+Chat and notifications in the hosted web build refresh every 15 seconds.
+PythonAnywhere's experimental ASGI proxy reported HTTPS as HTTP, causing redirect
+loops. Standard WSGI hosting avoids that limitation and preserves HTTPS redirects.
+WebSockets are not enabled on this deployment.
 
-1. Create a free Supabase project. Copy its PostgreSQL session-pooler connection
-   string into Render's DATABASE_URL secret (URL-encode the password).
-2. Create the private trustmart-media bucket. In Supabase Storage S3 settings,
-   generate server-side S3 keys. Put the access key, secret, endpoint, and region
-   in the corresponding Render S3_* environment variables. Do not put these in
-   the React build or Android apps.
-3. Push this folder as the GitHub repository root, then create a Render Blueprint
-   using render.yaml. Confirm all compute plans remain free.
-4. Set VITE_API_URL to the actual backend HTTPS URL followed by /api.
-   Set CORS_ALLOWED_ORIGINS and CSRF_TRUSTED_ORIGINS to the actual frontend HTTPS
-   origin (no trailing slash). Redeploy affected services after setting URLs.
-5. The backend runs collectstatic during build and migrations at startup. The
-   production settings require DEBUG=False, Redis, a strong secret, PostgreSQL,
-   and private S3 storage. Local development still uses config.settings.
-6. Create privileged accounts through a secure management session; do not seed
-   the publicly documented demo administrator passwords on the public service.
-7. In both Android apps, set the server URL to https://YOUR-API-HOST/api/.
+## Paths and settings
 
-## Verification before declaring the site live
+- Code: `/home/jeramkraskens/TrustMart`
+- Virtualenv: `/home/jeramkraskens/trustmart-venv`
+- WSGI file: `/var/www/jeramkraskens_pythonanywhere_com_wsgi.py`
+- Django settings: `config.pythonanywhere`
+- Frontend build: `deploy/web`
+- Database: `backend/db.sqlite3`
+- Uploads: `backend/media`
+- Secrets: `backend/.env` (server only, excluded from Git)
 
-- Resolve dependency installation on the hosting Python runtime; existing pinned
-  dependencies have not yet been verified against the remote package index.
-- GET /api/health/ should return {"status":"ok"} over HTTPS.
-- Verify frontend refresh on a nested route, registration/login, token refresh,
-  listing browsing, authorized upload/download, moderation, and mobile login.
-- Restart the backend and confirm database records and uploads survive.
-- Confirm private evidence files are accessible only through authorized API
-  responses. Signed URLs expire after one hour; reload to obtain fresh URLs.
-- Test recommendation memory usage on the free backend before the viva.
+Force HTTPS is enabled in the PythonAnywhere Web tab. Do not add a public `/media/`
+static mapping: uploads use signed, expiring URLs. Django admin is `/django-admin/`;
+the React administrator dashboard is `/admin/overview`.
 
-Render's free backend sleeps after inactivity and has ephemeral local storage.
-Supabase Free projects may pause after inactivity. No local database or uploaded
-files have been migrated by these configuration changes. Keep a local demo backup.
+## Create your administrator
 
-References: https://render.com/docs/blueprint-spec,
-https://render.com/docs/free,
-https://supabase.com/docs/guides/storage/s3/authentication
+In a PythonAnywhere Bash console, run:
+
+```bash
+cd ~/TrustMart/backend
+DJANGO_SETTINGS_MODULE=config.pythonanywhere ~/trustmart-venv/bin/python manage.py createsuperuser
+```
+
+Enter your own username, email and password in the console. Password input is
+hidden. No default administrator or public demo password has been created.
+Buyers and sellers can register through the website.
+
+## Deploy updates
+
+Build the frontend locally with `VITE_API_URL=/api` and
+`VITE_LIVE_TRANSPORT=polling`, copy `frontend/dist` into `deploy/web`, then commit
+and push. Never commit `.env`, databases, uploaded evidence or signing keys.
+In PythonAnywhere Bash:
+
+```bash
+cd ~/TrustMart
+ git pull --ff-only origin main
+cd backend
+export DJANGO_SETTINGS_MODULE=config.pythonanywhere
+~/trustmart-venv/bin/python manage.py migrate
+~/trustmart-venv/bin/python manage.py collectstatic --noinput
+```
+
+Then click **Reload** in the PythonAnywhere Web tab. Back up SQLite and media
+before changing schemas; keep backups private and outside the public repository.
+If an older browser cached a redirect loop, clear site cache or use a fresh browser.
+
+## Mobile apps
+
+Set the app's server/API URL to:
+`https://jeramkraskens.pythonanywhere.com/api/`
+Existing APKs are not automatically rebuilt by hosting the backend. Their saved
+local server address must be changed. WebSocket-only features need HTTP fallback
+on this WSGI host; no mobile device integration test has been performed.
+
+## Validation
+
+- Frontend production build passed.
+- 21 Django account and hosted-file tests passed on the cloud runtime.
+- Public homepage and login render; HTTPS health endpoint returns `{"status":"ok"}`.
+- Existing Render configuration is an alternative, not the active deployment.
+- The previously created Supabase project is unused by this deployment.
